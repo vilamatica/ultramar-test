@@ -8,56 +8,109 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <title>{{ title }}</title>
+    <title>{% block title %} {% endblock %} | Liner APP</title>
     <link href="{% static 'css/base.css' %}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.9.0/css/ol.css">
+    {% block extra_css %}{% endblock %}
+    
     <style type="text/css">      
     </style>
   </head>
   <body id="page-top">
     <nav id="main-header" class="navbar sticky-top bg-dark navbar-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#page-top">Liner APP</a>        
-        <button class="navbar-toggler rounded" type="button"
+        <a class="navbar-brand" href="#page-top">Liner APP</a>  
+        
+        <div class="d-none d-md-block" id="navbarResponsive">
+          <ul class="nav nav-pills">            
+            <li class="nav-item"><a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/"><span style="color: #fff">Home</span></a></li>
+            <li class="nav-item"><a class="nav-link {% if '/logistics/bookings/' in request.path %}active{% endif %}" href="/logistics/bookings/"><span style="color: #fff">Bookings</span></a></li>
+            <li class="nav-item"><a class="nav-link {% if '/logistics/vehicles/' in request.path %}active{% endif %}" href="/logistics/vehicles/"><span style="color: #fff">Vehicles</span></a></li>
+          </ul>
+        </div>
+
+        <div class="d-none d-md-block">
+          <div class="btn-group">
+            <button type="button" class="btn dropdown-toggle rounded d-flex align-items-center gap-2 rounded" data-bs-toggle="dropdown" aria-expanded="false" 
+            style="color: rgba(255, 255, 255, .55); border-color: rgba(255, 255, 255, .1)">
+              <i class="fa fa-user"></i>
+              <span style="color: #fff; font-size: 16px">
+                {% if request.user.is_authenticated %}
+                  {{ request.user }}
+                {% else %}
+                  Guest
+                {% endif %}
+              </span>
+            </button>
+            <ul class="dropdown-menu">
+              {% if request.user.is_authenticated %}
+                <li class="logout-btn"><a class="dropdown-item" href="{% url 'admin:logout'  %}" >Log Out</a></li>
+              {% else %}
+                <li ><a class="dropdown-item" href="{% url 'admin:login'  %}">Log In</a></li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+
+
+        <button class="d-md-none navbar-toggler rounded d-flex align-items-center gap-2" type="button"
           data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-          aria-label="Toggle navigation">
+          aria-label="Toggle navigation"
+        >
           <i class="fa fa-user"></i>
+          <span style="color: #fff; font-size: 16px">
+            {% if request.user.is_authenticated %}
+              {{ request.user }}
+            {% else %}
+              Guest
+            {% endif %}
+          </span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ms-auto">            
+
+        <div class="d-md-none collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto">       
+            <li class="nav-item"><a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/"><span style="color: #fff">Home</span></a></li>
+            <li class="nav-item"><a class="nav-link {% if '/logistics/bookings/' in request.path %}active{% endif %}" href="/logistics/bookings/"><span style="color: #fff">Bookings</span></a></li>
+            <li class="nav-item"><a class="nav-link {% if '/logistics/vehicles/' in request.path %}active{% endif %}" href="/logistics/vehicles/"><span style="color: #fff">Vehicles</span></a></li>
+                 
           {% if request.user.is_authenticated %}
-          <li><a href="/"><span style="color: #fff">Home</span></a></li>
-          <li><span style="color: #fff">{{ request.user }}</span></li>
-          <li><a href="{% url 'admin:logout'  %}">Log Out</a></li> 
+            <li class='logout-btn'><a href="{% url 'admin:logout'  %}" >Log Out</a></li> 
           {% else %}
-          <li><a href="{% url 'admin:login'  %}">Log In</a></li>
+            <li><a href="{% url 'admin:login'  %}">Log In</a></li>
           {% endif %}
           </ul>
         </div>
+
       </div>
     </nav>
-    <div class="container-fluid">
+    <main class="container-fluid">
       <div class="row">      
-        <div class="col-12" style="background-color: #fff;">
+        <div class="col-12 mt-4" style="background-color: #fff;">
           {% block content %}{% endblock %}
         </div>
       </div>
-    </div>
 
-    <!-- Optional JavaScript; choose one of the two! -->
+      <div id="toast"></div>
+    </main>
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    {% comment %} <!-- Option 2: Separate Popper and Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.9.0/build/ol.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.9.0/build/ol.js"></script> {% endcomment %}
 
-    <script src="{% static 'js/project.js' %}"></script>
+    <script src="{% static 'js/base.js' %}"></script>
+    {% block extra_js %}{% endblock %}
   </body>
 </html>
 

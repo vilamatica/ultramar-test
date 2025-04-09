@@ -1,0 +1,77 @@
+<div
+    class="modal fade"
+    id="cu-vehicle-modal"
+    tabindex="-1"
+    aria-labelledby="cu-vehicle-modal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="cu-vehicle-form">
+          <div class="modal-header">
+            <h5 class="modal-title" id="cu-modal-title">
+              Create/Edit Vehicle
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            {% csrf_token %}
+            <input type="hidden" id="modal-vehicle_id" />
+            <div class="mb-3">
+              <label for="modal-vehicle_vin" class="form-label">Vehicle's VIN</label>
+              <input
+                type="text"
+                class="form-control"
+                id="modal-vehicle_vin"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="modal-vehicle_make" class="form-label">Vehicle's Make</label>
+              <input type="text" class="form-control" id="modal-vehicle_make" />
+            </div>
+            <div class="mb-3">
+              <label for="modal-vehicle_model" class="form-label">Vehicle's Model</label>
+              <input
+                type="text"
+                class="form-control"
+                id="modal-vehicle_model"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="modal-vehicle_weight" class="form-label">Vehicle's Weight</label>
+              <input
+                type="text"
+                class="form-control"
+                id="modal-vehicle_weight"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="modal-vehicle_booking" class="form-label">Vehicle's Bookings</label> 
+              <select class="form-select" aria-label="Default select example" id="modal-vehicle_booking">
+                <option value="" {% if booking.id == 0 %}selected{% endif %}>None</option>
+                {% for booking in bookings %}
+                  <option value="{{ booking.id }}" {% if booking.id == vehicle.booking_id %}selected{% endif %}>{{ booking.booking_number }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

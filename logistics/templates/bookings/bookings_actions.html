@@ -1,0 +1,66 @@
+<button
+  class="btn btn-primary dropdown-toggle"
+  type="button"
+  id="dropdown-menu-table-actions"
+  data-bs-toggle="dropdown"
+  aria-expanded="false"
+>
+  Actions
+</button>
+<ul class="dropdown-menu" aria-labelledby="dropdown-menu-table-actions">
+  <li>
+    <a class="dropdown-item" href="#">
+      <!-- Button trigger modal -->
+      <button
+        type="button"
+        class="btn"
+        data-bs-toggle="modal"
+        data-bs-target="#cu-booking-modal"
+        onclick="openBookingModal()"
+      >
+        Create booking
+      </button>
+    </a>
+  </li>
+  <li>
+    <a class="dropdown-item" href="#">
+      <!-- Button trigger modal -->
+      <button
+        type="button"
+        class="btn"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Import as XLS
+      </button>
+    </a>
+  </li>
+  <li>
+    <a class="dropdown-item" href="#">
+      <!-- Button trigger modal -->
+      <button
+        type="button"
+        class="btn"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        onclick="exportBookingsXLS()"
+      >
+        Export as XLS
+      </button>
+    </a>
+  </li>
+  <li>
+    <a class="dropdown-item" href="#">
+      <!-- Button trigger modal -->
+      <button
+        type="button"
+        class="btn"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        onclick="exportBookingsPDF()"
+      >
+        Export as PDF
+      </button>
+    </a>
+  </li>
+</ul>

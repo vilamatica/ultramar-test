@@ -1,0 +1,55 @@
+<div
+    class="modal fade"
+    id="view-details-modal"
+    tabindex="-1"
+    aria-labelledby="view-details-modal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="view-details-modal">Booking Details</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex flex-column gap-2">
+              <span class="fw-bold" style="opacity: 0.5; font-size:14px">Booking Number</span>
+              <span id="details-booking_number"></span>
+            </li>
+            <li class="list-group-item d-flex flex-column gap-2">
+              <span class="fw-bold" style="opacity: 0.5; font-size:14px">Loading Port</span>
+              <span id="details-loading_port"></span>
+            </li>
+            <li class="list-group-item d-flex flex-column gap-2">
+              <span class="fw-bold" style="opacity: 0.5; font-size:14px">Discharge Port</span>
+              <span id="details-discharge_port"></span>
+            </li>
+            <li class="list-group-item d-flex flex-column gap-2">
+              <span class="fw-bold" style="opacity: 0.5; font-size:14px">Ship Arrival Date</span>
+              <span id="details-ship_arrival_date"></span>
+            </li>
+            <li class="list-group-item d-flex flex-column gap-2">
+              <span class="fw-bold" style="opacity: 0.5; font-size:14px">Ship Departure Date</span>
+              <span id="details-ship_departure_date"></span>
+            </li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-danger" id="details-delete-btn">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>

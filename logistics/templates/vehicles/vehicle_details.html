@@ -1,0 +1,55 @@
+<div
+    class="modal fade"
+    id="view-details-modal"
+    tabindex="-1"
+    aria-labelledby="view-details-modal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="view-details-modal">Vehicle Details</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex flex-column gap-2">
+              <span class="fw-bold" style="opacity: 0.5; font-size:14px">Vehicle's VIN</span>
+              <span id="details-vehicle_vin"></span>
+            </li>
+            <li class="list-group-item d-flex flex-column gap-2">
+              <span class="fw-bold" style="opacity: 0.5; font-size:14px">Vehicle's Make</span>
+              <span id="details-vehicle_make"></span>
+            </li>
+            <li class="list-group-item d-flex flex-column gap-2">
+              <span class="fw-bold" style="opacity: 0.5; font-size:14px">Vehicle's Model</span>
+              <span id="details-vehicle_model"></span>
+            </li>
+            <li class="list-group-item d-flex flex-column gap-2">
+              <span class="fw-bold" style="opacity: 0.5; font-size:14px">Vehicle's Weight</span>
+              <span id="details-vehicle_weight"></span>
+            </li>
+            <li class="list-group-item d-flex flex-column gap-2">
+              <span class="fw-bold" style="opacity: 0.5; font-size:14px">Vehicle's Booking</span>
+              <span id="details-vehicle_booking"></span>
+            </li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-danger" id="details-delete-btn">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>

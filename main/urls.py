@@ -1,28 +1,27 @@
-"""main URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
-from django.urls import include
-from django.urls import path
+from django.urls import path, include
 from .views import HomeView
+from logistics.views import BookingListCreate, BookingRetrieveUpdateDestroy, ExportBookingsXLS, ExportBookingsPDF, ImportBookingsXLS
+from logistics.views import VehicleListCreate, VehicleRetrieveUpdateDestroy, ExportVehiclesXLS, ExportVehiclesPDF, ImportVehiclesXLS
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", HomeView.as_view(), name="HomeView"),
+    path('logistics/', include('logistics.urls'), name='logistics'),
+    
+    path('api/bookings/', BookingListCreate.as_view(), name='booking-list-create'),
+    path('api/bookings/<int:pk>/', BookingRetrieveUpdateDestroy.as_view(), name='booking-update'),
+    path('api/bookings/export-xls/', ExportBookingsXLS.as_view(), name='export_bookings_xls'),
+    path('api/bookings/export-pdf/', ExportBookingsPDF.as_view(), name='export_bookings_pdf'),
+    path('api/bookings/import-xls/', ImportBookingsXLS.as_view(), name='import_bookings_xls'),
+    
+    path('api/vehicles/', VehicleListCreate.as_view(), name='vehicle-list-create'),
+    path('api/vehicles/<int:pk>/', VehicleRetrieveUpdateDestroy.as_view(), name='vehicle-update'),
+    path('api/vehicles/export-xls/', ExportVehiclesXLS.as_view(), name='export_vehicles_xls'),
+    path('api/vehicles/export-pdf/', ExportVehiclesPDF.as_view(), name='export_vehicles_pdf'),
+    path('api/vehicles/import-xls/', ImportVehiclesXLS.as_view(), name='import_vehicles_xls'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  
 

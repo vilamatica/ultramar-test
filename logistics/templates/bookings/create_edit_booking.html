@@ -1,0 +1,86 @@
+<div
+    class="modal fade"
+    id="cu-booking-modal"
+    tabindex="-1"
+    aria-labelledby="cu-booking-modal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="cu-booking-form">
+          <div class="modal-header">
+            <h5 class="modal-title" id="cu-modal-title">
+              Create/Edit Booking
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            {% csrf_token %}
+            <input type="hidden" id="modal-booking_id" />
+            <div class="mb-3">
+              <label for="modal-booking_number" class="form-label"
+                >Booking Number</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="modal-booking_number"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="modal-loading_port" class="form-label"
+                >Loading Port</label
+              >
+              <input type="text" class="form-control" id="modal-loading_port" />
+            </div>
+            <div class="mb-3">
+              <label for="modal-discharge_port" class="form-label"
+                >Discharge Port</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="modal-discharge_port"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="modal-ship_arrival_date" class="form-label"
+                >Ship Arrival Date</label
+              >
+              <input
+                type="date"
+                class="form-control"
+                id="modal-ship_arrival_date"
+              />
+            </div>
+            
+            <div class="mb-3">
+              <label for="modal-ship_departure_date" class="form-label"
+                >Ship Departure Date</label
+              >
+              <input
+                type="date"
+                class="form-control"
+                id="modal-ship_departure_date"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
